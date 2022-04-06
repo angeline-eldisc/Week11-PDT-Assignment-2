@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Poppins:wght@300;400;500&display=swap");
+
+:root {
+    --main-color: #027581;
+    --blue: #2962ff;
+    --indigo: #6610f2;
+    --purple: #7460ee;
+    --pink: #e83e8c;
+    --red: #f62d51;
+    --orange: #fb8c00;
+    --yellow: #ffbc34;
+    --green: #36bea6;
+    --teal: #20c997;
+    --cyan: #4fc3f7;
+    --white: #fff;
+    --gray-dark: #343a40;
+    --gray: #8390a2;
+    --primary: #7460ee;
+    --secondary: #6c757d;
+    --success: #36bea6;
+    --info: #2962ff;
+    --light: #f8f9fa;
+    --dark: #1d2231;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1600px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none !important;
+    list-style-type: none;
+    font-family: "Poppins", sans-serif;
+}
+
+#sidebar-toggle {
+    display: none;
+}
+
+.sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background: var(--main-color);
+    color: #efefef;
+    padding: 1rem;
+    overflow-y: auto;
+    transition: width 500ms;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0rem 1rem;
+}
+
+.logo-icon {
+    width: 40px;
+}
+
+.logo-name {
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.sidebar-menu {
+    padding: 1rem;
+}
+
+.sidebar ul {
+    padding-left: 0;
+}
+
+.sidebar li {
+    margin-bottom: 1rem;
+}
+
+.sidebar a {
+    color: #efefef;
+    font-size: 1rem;
+}
+
+.sidebar a span:last-child {
+    padding-left: 0.6rem;
+}
+
+#sidebar-toggle:checked ~ .sidebar {
+    width: 72px;
+}
+
+#sidebar-toggle:checked ~ .sidebar .sidebar-header h3 span,
+#sidebar-toggle:checked ~ .sidebar li span:last-child {
+    display: none;
+}
+
+#sidebar-toggle:checked ~ .sidebar .sidebar-header,
+#sidebar-toggle:checked ~ .sidebar li {
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar-toggle:checked ~ .main-content {
+    margin-left: 72px;
+}
+
+#sidebar-toggle:checked ~ .main-content header {
+    left: 72px;
+    width: calc(100% - 72px);
+}
+
+.main-content {
+    position: relative;
+    margin-left: 240px;
+    transition: margin-left 500ms;
+}
+
+header {
+    position: fixed;
+    left: 240px;
+    top: 0;
+    z-index: 100;
+    width: calc(100% - 240px);
+    background: #fff;
+    height: 60px;
+    padding: 0rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    transition: left 500ms;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+}
+
+.left-side input {
+    border: 0;
+    outline: 0;
+    padding: 1rem;
+    height: 38px;
+    width: 100%;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+}
+
+.right-side span,
+.right-side div.photo-profile {
+    margin-left: 1.2rem;
+}
+
+.right-side div.photo-profile {
+    height: 38px;
+    width: 38px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+main {
+    margin-top: 60px;
+    background: #f1f5f9;
+    min-height: 90vh;
+    padding: 2rem 3rem;
+}
+
+.title {
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.title h3,
+.table-title-card h3 {
+    font-size: 1.5rem;
+}
+
+.table-title {
+    color: var(--gray);
+    margin: 1rem;
+}
+
+.table-title-card,
+.form-card,
+.main-card,
+.report-card {
+    margin: 1rem;
+}
+
+.table-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-card thead {
+    background: #efefef;
+    text-align: left;
+}
+
+th,
+td {
+    font-size: 1rem;
+    padding: 1rem;
+    color: var(--dark);
+}
+
+td {
+    font-size: 0.8rem;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9fbfc;
+}
+
+tbody tr:hover {
+    background: #f3f3f3;
+}
+
+.header-print img {
+    width: 100px;
+}
+
+.vertical-center {
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    top: 50%;
+}
+
+@media print {
+    .sidebar,
+    header,
+    .title {
+        display: none;
+    }
+
+    .main-content,
+    main,
+    .title,
+    .report-card,
+    .main-card {
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        background: transparent;
+    }
+
+    .card {
+        border: 1px solid transparent;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 72px;
+        z-index: 150;
+    }
+
+    .sidebar .sidebar-header h3 span,
+    .sidebar li span:last-child {
+        display: none;
+    }
+
+    .sidebar .sidebar-header,
+    .sidebar li {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 72px;
+    }
+
+    .main-content header {
+        left: 72px;
+        width: calc(100% - 72px);
+    }
+
+    #sidebar-toggle:checked ~ .sidebar {
+        width: 240px;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header h3 span,
+    #sidebar-toggle:checked ~ .sidebar li span:last-child {
+        display: inline;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar li {
+        display: block;
+    }
+
+    #sidebar-toggle:checked ~ .main-content {
+        margin-left: 72px;
+    }
+
+    #sidebar-toggle:checked ~ .main-content header {
+        left: 72px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .report-card .main-card .row .col-md-4 {
+        margin-bottom: 1rem;
+    }
+
+    .report-card .main-card .row .col-md-2 {
+        text-align: right;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

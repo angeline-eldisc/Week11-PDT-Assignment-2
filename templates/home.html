@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .login-link:hover{
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <main>
+        <h2 class="title">Dashboard</h2>
+        
+        <div class="dash-cards">
+            <div class="row mb-4">
+                <div class="col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center" style="padding: 1.3rem 1rem;">
+                            <span style="padding-right: 1.5rem; color: #777;"></span>
+                            <div>
+                                {% if session and session.get('name') %}
+                                <h5 style="color: #1d2231; font-size: 1.5rem;">Welcome to this mini blog!</h5>
+                                <h4 class="mb-0" style="color: #1d2231; font-size: 1.1rem;">Hello, {{ session.get('name') }}! You are logged in using '{{ session.get('username') }}' as your username.</h4>
+                                {% else %}
+                                <h5 style="color: #1d2231; font-size: 1.5rem;">Welcome to this mini blog!</h5>
+                                <h4 class="mb-0" style="color: #1d2231; font-size: 1.1rem;">Hello, Guest! Please login if you want to have the full feature of this website <a href="{{ url_for('login') }}" class="login-link">Login here</a>.</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if session and session.get('name') %}
+        <div class="dash-cards">
+            <div class="row mb-4">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center" style="padding: 1.3rem 1rem;">
+                            <span style="padding-right: 1.5rem; color: #777;"></span>
+                            <div>
+                                <h5 style="color: #8390a2; font-size: 1rem;">All Books</h5>
+                                <h4 class="mb-0" style="color: #1d2231; font-size: 1.1rem;">{{ count_articles[0] }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center" style="padding: 1.3rem 1rem;">
+                            <span style="padding-right: 1.5rem; color: #777;"></span>
+                            <div>
+                                <h5 style="color: #8390a2; font-size: 1rem;">Your Book(s)</h5>
+                                <h4 class="mb-0" style="color: #1d2231; font-size: 1.1rem;">{{ count_your_articles[0] }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% from "layouts/_authFormHelpers.html" import render_field %}
+{% extends "layouts/auth.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="center">
+        <h1>Login</h1>
+        {% for category, message in get_flashed_messages(with_categories = true) %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin: 0 40px;">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        <form method="POST" autocomplete="off">
+            {{ render_field(form.username) }}
+            {{ render_field(form.password) }}
+
+            <a href="{{ url_for('index') }}" class="guest-link">
+                <div class="guest">Login as a Guest?</div>
+            </a>
+            
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                Not registered? <a href="{{ url_for('register') }}">Sign up here</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

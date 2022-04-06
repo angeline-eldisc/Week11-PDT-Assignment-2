@@ -1,0 +1,30 @@
+{% from "layouts/_authFormHelpers.html" import render_field %}
+{% extends "layouts/auth.html" %}
+{% block title %}Register{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="center">
+        <h1>Register</h1>
+        {% for category, message in get_flashed_messages(with_categories = true) %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin: 0 40px;">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        <form method="POST" autocomplete="off">
+            {{ render_field(form.name) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.username) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.confirm) }}
+
+            <input type="submit" value="Sign Up">
+
+            <div class="signup_link">
+                Already registered? <a href="{{ url_for('login') }}">Login here</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

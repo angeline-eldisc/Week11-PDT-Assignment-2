@@ -1,0 +1,12 @@
+{% macro render_field(field) %}
+<div class="txt_field">
+    {{ field(**kwargs)|safe }}
+    <span></span>
+    <label>{{ field.label.text }}</label>
+</div>
+{% for error in field.errors %}
+<div style="padding-left: 5px;">
+    <span class="mt-2" style="color: red; font-size: 14px;">{{ error }}</span>
+</div>
+{% endfor %}
+{% endmacro %}

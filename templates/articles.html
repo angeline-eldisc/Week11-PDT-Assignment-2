@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+{% block title %}Articles{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <main>
+        <h2 class="title">Articles</h2>
+
+        <div class="d-flex">
+            <a href="{{ url_for('create') }}" class="btn btn-primary mb-3 float-left">Create New Article</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <ul class="nav nav-pills float-left" style="font-size: 13.5px;">
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if code == 'articles' else '' }}" aria-current="page" href="{{ url_for('articles') }}">All Articles</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if code == 'your_articles' else '' }}" href="{{ url_for('your_articles') }}">Your Article(s)</a>
+                </li>
+            </ul> 
+        </div>
+        
+        {% for category, message in get_flashed_messages(with_categories = true) %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}        
+
+        <div class="dash-cards">
+            {% if articles %}
+            <div class="row mb-4">
+                {% for (article_id, title, _, user_id) in articles %}
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <div class="card-body align-items-center" style="padding: 1.3rem 1.2rem;">
+                            <div class="row">
+                                <div class="title col-md-6 vertical-center" style="vertical-align: middle; margin-bottom: 0;">
+                                    <h4 class="mb-0" style="color: #1d2231; font-size: 1.2rem;">{{ title }}</h4>
+                                </div>
+                                
+                                <div class="actions col-md-6 vertical-center mt-1 d-block" style="text-align: right;">
+                                    <a href="{{ url_for('detail', article_id = article_id) }}" class="btn btn-info">Detail</a>
+                                    {% if session and session.get('user_id') == user_id %}
+                                        <a href="{{ url_for('edit', article_id = article_id) }}" class="btn btn-warning text-white">Edit</a>
+                                        <button type="button" class="btn btn-danger" onclick="deleteArticle({{ article_id }}, {{ '\"%s\"' % title }})">Delete</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="row mb-4">
+                <div class="col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body align-items-center" style="padding: 1.3rem 1.2rem;">
+                            <div class="row">
+                                <div class="title col-md-6" style="vertical-align: middle; margin-bottom: 0;">
+                                    <h4 class="mb-0" style="color: #1d2231; font-size: 1.2rem;">No record found</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

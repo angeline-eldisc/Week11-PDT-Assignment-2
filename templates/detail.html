@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ article[0] }}{% endblock %}
+
+{% block content %}
+<main>
+    <h2 class="title"> {{ article[0] }}</h2>
+
+    <div class="dash-cards">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="table-title-card">
+                        <a href="{{ url_for('articles') }}" class="d-inline-block"><span class="ti-arrow-left" style="color: #212529"></span></a>
+                        <h3 class="d-inline-block mb-0">Detail</h3>
+                    </div>
+                    <div class="card-body d-flex align-items-center" style="padding: 0 1.3rem 1rem 1.3rem;">
+                        {% if article %}
+                        <table class="w-100" border="0">
+                            <tr>
+                                <td>Title</td>
+                                <td>:</td>
+                                <td>{{ article[0] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>:</td>
+                                <td>{{ article[1] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Created By</td>
+                                <td>:</td>
+                                <td>{{ article[2] }}</td>
+                            </tr>
+                        </table>
+                        {% else %}
+                        <h6>Invalid Article</h6>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
